@@ -22,7 +22,14 @@ const log = async (request: Request, additionalData) => {
   const logRecord = { ...(await logObject(now, request)), ...additionalData };
 
   return await kv.set(
-    ["logs", now.getFullYear(), now.getMonth() + 1, now.getDate(), ulid()],
+    [
+      "obsidian-opener",
+      "logs",
+      now.getFullYear(),
+      now.getMonth() + 1,
+      now.getDate(),
+      ulid(),
+    ],
     logRecord,
     {
       expireIn: 1000 * 60 * 60 * 24 * EXPIRE_LOGS_DAYS,
